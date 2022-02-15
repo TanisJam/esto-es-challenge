@@ -1,0 +1,24 @@
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  button {
+    background-color: white;
+    border: none;
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(217, 217, 217, 1);
+    z-index: 2;
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+  .up {
+    font-size: 2rem;
+    position: absolute;
+    color: white;
+    top: -1.5rem;
+    right: 0;
+  }
+}

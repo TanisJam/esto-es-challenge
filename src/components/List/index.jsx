@@ -1,15 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
+import styles from "./List.module.scss";
 
 export default function List() {
   const { projects } = useSelector((state) => state.projects);
-  console.log(projects);
   return (
-    <div className="list">
-      {projects.map((project) => (
-        <Card key={project.id} project={project} />
-      ))}
-    </div>
+    <table className={styles.list}>
+      <thead className={styles.header}>
+        <tr>
+          <td>Project info</td>
+          <td> Project Manager </td>
+          <td> Assiged to </td>
+          <td> Status </td>
+          <td> Action </td>
+        </tr>
+      </thead>
+      <tbody>
+        {projects.map((project) => (
+          <Card key={project.id} project={project} />
+        ))}
+      </tbody>
+    </table>
   );
 }

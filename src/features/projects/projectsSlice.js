@@ -1,33 +1,62 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let id = 4;
+
 const initialState = {
   projects: [
     {
       id: 1,
       name: "Landing Page",
-      createdDate: "2020-09-09",
-      createdHour: "10:30",
-      asignedTo: "Ignacio Truffa",
+      description: "Project",
+      createdDate: "2020/09/09",
+      createdHour: "10:30 am",
+      asignee: {
+        id: 1,
+        name: "Ignacio Truffa",
+        avatar: "https://i.pravatar.cc/150?img=1",
+      },
       status: "enabled",
-      projectManager: "Walt Cosani",
+      projectManager: {
+        id: 3,
+        name: "Walt Cosani",
+        avatar: "https://i.pravatar.cc/150?img=2",
+      },
     },
     {
       id: 2,
       name: "E-Comerce Shop",
-      createdDate: "2020-09-09",
-      createdHour: "10:30",
-      asignedTo: "Ignacio Truffa",
+      description: "Project",
+      createdDate: "2020/09/09",
+      createdHour: "10:30 am",
+      asignee: {
+        id: 1,
+        name: "Ignacio Truffa",
+        avatar: "https://i.pravatar.cc/150?img=1",
+      },
       status: "enabled",
-      projectManager: "Walt Cosani",
+      projectManager: {
+        id: 3,
+        name: "Walt Cosani",
+        avatar: "https://i.pravatar.cc/150?img=2",
+      },
     },
     {
       id: 3,
       name: "CMR Linkroom",
-      createdDate: "2020-09-09",
-      createdHour: "10:30",
-      asignedTo: "Ignacio Truffa",
+      description: "Project",
+      createdDate: "2020/09/09",
+      createdHour: "10:30 am",
+      asignee: {
+        id: 1,
+        name: "Ignacio Truffa",
+        avatar: "https://i.pravatar.cc/150?img=1",
+      },
       status: "enabled",
-      projectManager: "Walt Cosani",
+      projectManager: {
+        id: 3,
+        name: "Walt Cosani",
+        avatar: "https://i.pravatar.cc/150?img=2",
+      },
     },
   ],
   filteredProjects: [],
@@ -38,7 +67,27 @@ export const projectsSlice = createSlice({
   initialState,
   reducers: {
     addProject: (state, action) => {
-      state.projects.push(action.payload);
+      const { name, description, asignee, status, projectManager } =
+        action.payload;
+      const projectToAdd = {
+        id: id++,
+        name,
+        description,
+        createdDate: "2020/09/09",
+        createdHour: "10:30 am",
+        asignee: {
+          id: 1,
+          name: asignee,
+          avatar: "https://i.pravatar.cc/150",
+        },
+        status,
+        projectManager: {
+          id: 3,
+          name: projectManager,
+          avatar: "https://i.pravatar.cc/150",
+        },
+      };
+      state.projects.push(projectToAdd);
     },
     deleteProject: (state, action) => {
       state.projects = state.projects.filter(
@@ -46,9 +95,22 @@ export const projectsSlice = createSlice({
       );
     },
     udpateProject: (state, action) => {
-      state.projects = state.projects.map((project) =>
-        project.id === action.payload.id ? action.payload : project
-      );
+      const { name, description, projectManager, asignee, status } =
+        action.payload;
+      state.projects = state.projects.map((project) => {
+        if (project.id === action.payload.id) {
+          const projectEdited = {
+            ...project,
+            name,
+            description,
+            status,
+          };
+          projectEdited.projectManager.name = projectManager;
+          projectEdited.asignee.name = asignee;
+          return projectEdited;
+        }
+        return project;
+      });
     },
   },
 });

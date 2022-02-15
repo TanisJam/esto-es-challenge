@@ -1,0 +1,24 @@
+.list {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+
+  tr {
+    border-bottom: 1px solid rgba(217, 217, 217, 1);
+  }
+
+  .header {
+    td {
+      padding: 1rem;
+    }
+    background-color: rgba(0, 0, 0, 0.02);
+    box-shadow: 0 -1px 0 #d9d9d9 inner;
+  }
+  @media screen and (max-width: 480px) {
+    .header {
+      display: none;
+    }
+  }
+}

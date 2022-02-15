@@ -1,9 +1,26 @@
 import React from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import styles from "./Nav.module.scss";
 import logo from "../../assets/images/logo.png";
+import { GoPlus } from "react-icons/go";
 import Button from "./../Button";
+import { MdArrowBack } from "react-icons/md";
 
 export default function Nav() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isAdd = location.pathname === "/add";
+  const isEdit = location.pathname === "/edit";
+  const title = () => {
+    if (isAdd) {
+      return "Add Project";
+    } else if (isEdit) {
+      return "Edit Project";
+    } else {
+      return "Projects";
+    }
+  };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.brandBar}>
@@ -11,9 +28,19 @@ export default function Nav() {
       </div>
       <div className={styles.navBar}>
         <div className={styles.breadcrumb}>
-          <h2>My projects</h2>
+          {isAdd || isEdit ? (
+            <>
+              <MdArrowBack />
+              <Link to="/">Back</Link>
+            </>
+          ) : null}
+          <h2>{title()}</h2>
         </div>
-        <Button>+ Add project</Button>
+        {isAdd || isEdit ? null : (
+          <Button onClick={()=> navigate("/add")} >
+            <GoPlus /> Add project
+          </Button>
+        )}
       </div>
     </nav>
   );
