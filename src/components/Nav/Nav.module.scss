@@ -1,0 +1,25 @@
+.nav {
+  background-color: #fff;
+  .brandBar {
+    height: 3rem;
+    border-bottom: 1px solid rgba(217, 217, 217, 1);
+    .logo {
+      height: 1.8rem;
+      padding-inline: 1rem;
+      margin-block: 0.5rem;
+    }
+  }
+  .navBar {
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    border-bottom: 1px solid rgba(217, 217, 217, 1);
+    h2 {
+      font-size: 1.2rem;
+      margin-block: 0.5rem;
+    }
+  }
+}
