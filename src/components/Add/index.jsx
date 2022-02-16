@@ -38,75 +38,74 @@ export default function Add() {
   });
 
   return (
-    <div>
-      <FormikProvider value={formik}>
-        <Form className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="name">Project Name</label>
-            <Field id="name" name="name" />
-            <ErrorMessage
-              component="span"
-              className={styles.errorMessage}
-              name="name"
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="description">Description</label>
-            <Field id="description" name="description" />
-            <ErrorMessage
-              component="span"
-              className={styles.errorMessage}
-              name="description"
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="projectManager">Project Manager</label>
-            <Field component="select" id="projectManager" name="projectManager">
-              <option value="" disabled defaultValue hidden>
-                Select a person
-              </option>
-              <option value="Walt Cosani">Walt Cosani</option>
-              <option value="Frank Klink">Frank Klink</option>
-            </Field>
-            <ErrorMessage
-              component="span"
-              className={styles.errorMessage}
-              name="projectManager"
-            />
-          </div>
+    <FormikProvider value={formik}>
+      <Form className={styles.form}>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Project Name</label>
+          <Field id="name" name="name" />
+          <ErrorMessage
+            component="span"
+            className={styles.errorMessage}
+            name="name"
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="description">Description</label>
+          <Field id="description" name="description" />
+          <ErrorMessage
+            component="span"
+            className={styles.errorMessage}
+            name="description"
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="projectManager">Project Manager</label>
+          <Field component="select" id="projectManager" name="projectManager">
+            <option value="" disabled defaultValue hidden>
+              Select a person
+            </option>
+            <option value="Walt Cosani">Walt Cosani</option>
+            <option value="Frank Klink">Frank Klink</option>
+          </Field>
+          <ErrorMessage
+            component="span"
+            className={styles.errorMessage}
+            name="projectManager"
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="asignee">Asigned to</label>
-            <Field component="select" id="asignee" name="asignee">
-              <option value="" disabled defaultValue hidden>
-                Select a person
-              </option>
-              <option value="Ignacio Truffa">Ignacio Truffa</option>
-              <option value="Raul Ricardo">Raul Ricardo</option>
-            </Field>
-            <ErrorMessage
-              component="span"
-              className={styles.errorMessage}
-              name="asignee"
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="asignee">Asigned to</label>
+          <Field component="select" id="asignee" name="asignee">
+            <option value="" disabled defaultValue hidden>
+              Select a person
+            </option>
+            <option value="Ignacio Truffa">Ignacio Truffa</option>
+            <option value="Raul Ricardo">Raul Ricardo</option>
+          </Field>
+          <ErrorMessage
+            component="span"
+            className={styles.errorMessage}
+            name="asignee"
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="status">Status</label>
-            <Field component="select" id="status" name="status">
-              <option value="Enabled">Enabled</option>
-              <option value="Disabled">Disabled</option>
-            </Field>
-            <ErrorMessage
-              component="span"
-              className={styles.errorMessage}
-              name="status"
-            />
-          </div>
-
+        <div className={styles.formGroup}>
+          <label htmlFor="status">Status</label>
+          <Field component="select" id="status" name="status">
+            <option value="Enabled">Enabled</option>
+            <option value="Disabled">Disabled</option>
+          </Field>
+          <ErrorMessage
+            component="span"
+            className={styles.errorMessage}
+            name="status"
+          />
+        </div>
+        <div className={styles.formGroup}>
           <Button type="submit">Create project</Button>
-        </Form>
-      </FormikProvider>
-    </div>
+        </div>
+      </Form>
+    </FormikProvider>
   );
 }

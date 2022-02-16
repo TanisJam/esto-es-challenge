@@ -1,18 +1,22 @@
 .form {
+  background-color: white;
+  width: 100%;
+  max-width: 42rem;
+  box-shadow: inset 0px -1px 2px #a0a0a0, 0px 1px 3px #cacaca;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: flex-start;
-  padding: 2rem 1rem;
+  padding-top: 1.5rem;
+
   .formGroup {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    padding: 0;
+    padding: 0 1.5rem;
     margin-bottom: 2rem;
-    background-color: #fafafa;
     label {
       font-size: 0.8rem;
     }
@@ -20,7 +24,7 @@
       position: absolute;
       font-size: 0.6rem;
       bottom: -1rem;
-      left: 0.5rem;
+      left: 1.6rem;
       color: red;
     }
     input,

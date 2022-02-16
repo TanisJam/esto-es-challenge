@@ -20,7 +20,7 @@
       margin-top: -0.4rem;
     }
     @media screen and (min-width: 480px) {
-      padding : .8rem;
+      padding: 0.8rem;
     }
   }
   .projectManager,
@@ -34,9 +34,20 @@
       margin: 0;
     }
   }
+  .status {
+    p {
+      display: inline;
+      padding: 0 .5rem;
+      color: #595959;
+      font-weight: 500;
+      background: #f5f5f5;
+      border: 2px solid #d9d9d9;
+      border-radius: .5rem;
+    }
+  }
   .menu {
     position: absolute;
-    right: 4rem;
+    right: 2rem;
     bottom: -3rem;
   }
   @media screen and (max-width: 480px) {
@@ -63,5 +74,4 @@
       bottom: -2rem;
     }
   }
-  
 }
