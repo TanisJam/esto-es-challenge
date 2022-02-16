@@ -5,14 +5,15 @@
 
 body {
   margin: 0;
-  font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  font-family: "IBM Plex Sans Thai Looped", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
   font-size: 16px;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

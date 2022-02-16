@@ -21,15 +21,24 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-    }
-    a {
-      color: #000;
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 300;
-      &:hover {
-        text-decoration: underline;
-        text-decoration-color: var(--red);
+      a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #000;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.65);
+        svg {
+          font-size: 1.5rem;
+          color: rgba(0, 0, 0, 0.65);
+        }
+        &:hover {
+          color: black;
+          text-decoration: underline;
+          text-decoration-color: var(--red);
+        }
       }
     }
     h2 {

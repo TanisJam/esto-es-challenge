@@ -15,7 +15,7 @@ const initialState = {
         name: "Ignacio Truffa",
         avatar: "https://i.pravatar.cc/150?img=1",
       },
-      status: "enabled",
+      status: "Enabled",
       projectManager: {
         id: 3,
         name: "Walt Cosani",
@@ -33,7 +33,7 @@ const initialState = {
         name: "Ignacio Truffa",
         avatar: "https://i.pravatar.cc/150?img=1",
       },
-      status: "enabled",
+      status: "Enabled",
       projectManager: {
         id: 3,
         name: "Walt Cosani",
@@ -51,7 +51,7 @@ const initialState = {
         name: "Ignacio Truffa",
         avatar: "https://i.pravatar.cc/150?img=1",
       },
-      status: "enabled",
+      status: "Enabled",
       projectManager: {
         id: 3,
         name: "Walt Cosani",

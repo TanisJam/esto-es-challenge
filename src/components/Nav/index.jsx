@@ -17,7 +17,7 @@ export default function Nav() {
     } else if (isEdit) {
       return "Edit Project";
     } else {
-      return "Projects";
+      return "My Projects";
     }
   };
 
@@ -29,15 +29,14 @@ export default function Nav() {
       <div className={styles.navBar}>
         <div className={styles.breadcrumb}>
           {isAdd || isEdit ? (
-            <>
-              <MdArrowBack />
-              <Link to="/">Back</Link>
-            </>
+            <Link to="/">
+              <MdArrowBack /> Back
+            </Link>
           ) : null}
           <h2>{title()}</h2>
         </div>
         {isAdd || isEdit ? null : (
-          <Button onClick={()=> navigate("/add")} >
+          <Button onClick={() => navigate("/add")}>
             <GoPlus /> Add project
           </Button>
         )}
