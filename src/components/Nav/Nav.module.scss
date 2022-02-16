@@ -2,6 +2,7 @@
   background-color: #fff;
   .brandBar {
     height: 3rem;
+    padding-inline: .5rem;
     border-bottom: 1px solid rgba(217, 217, 217, 1);
     .logo {
       height: 1.8rem;
@@ -15,7 +16,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-inline: 1rem;
+    padding: 0 1rem 0 .5rem;
     border-bottom: 1px solid rgba(217, 217, 217, 1);
     .breadcrumb {
       display: flex;

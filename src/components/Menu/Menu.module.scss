@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.2);
   button {
     background-color: white;
     border: none;
@@ -19,9 +19,10 @@
     }
   }
   .up {
+    pointer-events: none;
     font-size: 2rem;
     position: absolute;
-    color: white;
+    color: rgb(231, 231, 231);
     top: -1.5rem;
     right: 0;
   }
