@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Search.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterProjects } from "../../features/projects/projectsSlice";
 import { AiOutlineReload } from "react-icons/ai";
 
 export default function Search() {
   const dispatch = useDispatch();
+  const isSearch = useSelector((state) => state.projects.isSearch);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    setSearch("");
+  }, [isSearch]);
 
   const handleChange = (e) => {
     const { value } = e.target;
     setSearch(e.target.value);
-    dispatch(filterProjects({ query: value }));
+    dispatch(filterProjects({ search: value }));
   };
   const handleReset = () => {
-    dispatch(filterProjects({ query: "" }));
+    dispatch(filterProjects({ reset: true }));
     setSearch("");
   };
 

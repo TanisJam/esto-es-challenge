@@ -59,6 +59,7 @@ const initialState = {
       },
     },
   ],
+  isSearch: false,
   filteredProjects: [],
 };
 
@@ -113,12 +114,15 @@ export const projectsSlice = createSlice({
       });
     },
     filterProjects: (state, action) => {
-      const { query } = action.payload;
-      if (query === "") {
+      const { search, reset } = action.payload;
+      if (reset) {
+        state.isSearch = false;
         state.filteredProjects = [];
       } else {
+        state.isSearch = true;
         state.filteredProjects = state.projects.filter((project) => {
-          return project.name.toLowerCase().includes(query.toLowerCase());
+          const { name } = project;
+          return name.toLowerCase().includes(search.toLowerCase());
         });
       }
     },
