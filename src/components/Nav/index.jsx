@@ -4,6 +4,7 @@ import styles from "./Nav.module.scss";
 import logo from "../../assets/images/logo.png";
 import { GoPlus } from "react-icons/go";
 import Button from "./../Button";
+import Search from "./../Search";
 import { MdArrowBack } from "react-icons/md";
 
 export default function Nav() {
@@ -41,6 +42,7 @@ export default function Nav() {
           </Button>
         )}
       </div>
+      <Search />
     </nav>
   );
 }

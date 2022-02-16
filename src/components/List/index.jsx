@@ -7,6 +7,10 @@ export default function List() {
   const [menuOpen, setIsMenuOpen] = useState(null);
 
   const { projects } = useSelector((state) => state.projects);
+  const { filteredProjects } = useSelector((state) => state.projects);
+
+  const projectsToList = filteredProjects.length > 0 ? filteredProjects : projects;
+
   return (
     <table className={styles.list}>
       <thead className={styles.header}>
@@ -19,7 +23,7 @@ export default function List() {
         </tr>
       </thead>
       <tbody>
-        {projects.map((project) => (
+        {projectsToList.map((project) => (
           <Card
             key={project.id}
             project={project}

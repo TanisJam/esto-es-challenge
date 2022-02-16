@@ -52,7 +52,11 @@ export default function Card({ project, menuOpen, setIsMenuOpen }) {
         </div>
       </td>
       <td className={styles.menu}>
-        <Menu isOpen={menuOpen === project.id} id={project.id} />
+        <Menu
+          isOpen={menuOpen === project.id}
+          id={project.id}
+          name={project.name}
+        />
       </td>
     </tr>
   );

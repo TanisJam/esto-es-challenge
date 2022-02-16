@@ -112,10 +112,20 @@ export const projectsSlice = createSlice({
         return project;
       });
     },
+    filterProjects: (state, action) => {
+      const { query } = action.payload;
+      if (query === "") {
+        state.filteredProjects = [];
+      } else {
+        state.filteredProjects = state.projects.filter((project) => {
+          return project.name.toLowerCase().includes(query.toLowerCase());
+        });
+      }
+    },
   },
 });
 
-export const { addProject, deleteProject, udpateProject } =
+export const { addProject, deleteProject, udpateProject, filterProjects } =
   projectsSlice.actions;
 
 export const selectCount = (state) => state.projects.value;

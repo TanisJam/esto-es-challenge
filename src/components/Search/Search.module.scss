@@ -1,0 +1,27 @@
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  .reloadIcon {
+    margin-right: -2rem;
+    z-index: 2;
+  }
+  svg {
+    color: rgba(0, 0, 0, 0.65);
+  }
+  input {
+    text-align: center;
+    margin: 0.5rem;
+    height: 2rem;
+    border: none;
+    box-shadow: 0 0 0 1px rgba(217, 217, 217, 1),
+      inset 0 0 0 1px rgba(217, 217, 217, 1);
+    border-radius: 0.5rem;
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 2px 1px #a0a0a0;
+    }
+  }
+}
