@@ -161,3 +161,14 @@ export function editProject(props) {
     }, 500);
   });
 }
+
+export function removeProject(props) {
+  const id = props;
+  projects = projects.filter((project) => project.id !== id);
+  console.log("projects", projects);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ sucsess: true });
+    }, 500);
+  });
+}

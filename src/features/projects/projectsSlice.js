@@ -4,6 +4,7 @@ import {
   searchProjects,
   createProject,
   editProject,
+  removeProject,
 } from "./projectsAPI";
 
 const initialState = {
@@ -51,15 +52,24 @@ export const updateProject = createAsyncThunk(
   }
 );
 
+export const deleteProject = createAsyncThunk(
+  "projets/deleteProject",
+  async (request, { dispatch }) => {
+    const response = await removeProject(request);
+    dispatch(getProjects());
+    return response.data;
+  }
+);
+
 export const projectsSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {
-    deleteProject: (state, action) => {
-      state.projects = state.projects.filter(
-        (project) => project.id !== action.payload
-      );
-    },
+    // deleteProject: (state, action) => {
+    //   state.projects = state.projects.filter(
+    //     (project) => project.id !== action.payload
+    //   );
+    // },
     resetFilter: (state) => {
       state.isSearch = false;
       state.filteredProjects = [];
@@ -95,10 +105,16 @@ export const projectsSlice = createSlice({
       })
       .addCase(updateProject.fulfilled, (state, action) => {
         state.status = "idle";
+      })
+      .addCase(deleteProject.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteProject.fulfilled, (state, action) => {
+        state.status = "idle";
       });
   },
 });
 
-export const { deleteProject, resetFilter } = projectsSlice.actions;
+export const { resetFilter } = projectsSlice.actions;
 
 export default projectsSlice.reducer;
