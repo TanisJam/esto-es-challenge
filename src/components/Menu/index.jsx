@@ -5,7 +5,7 @@ import { deleteProject } from "../../features/projects/projectsSlice";
 import { useNavigate } from "react-router-dom";
 import { RiEditBoxLine, RiDeleteBin7Line } from "react-icons/ri";
 import { GoTriangleUp } from "react-icons/go";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 export default function Menu({ isOpen, id, name }) {
   const dispatch = useDispatch();
@@ -14,20 +14,29 @@ export default function Menu({ isOpen, id, name }) {
     navigate(`/edit`, { state: { id } });
   };
   const handleDelete = () => {
-    swal({
+    Swal.fire({
       title: `Are you sure you want to delete ${name}?`,
       text: "Once deleted, you will not be able to recover this project!",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+      showCancelButton: true,
+      confirmButtonColor: "#6f9cc5",
+      cancelButtonColor: "#f5222d",
+      confirmButtonText: "Delete",
+      showClass: {
+        backdrop: "swal2-noanimation",
+        popup: "",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
         dispatch(deleteProject(id));
-        swal(`${name} has been successfully deleted.`, {
+        Swal.fire({
+          text: `${name} has been successfully deleted`,
           icon: "success",
+          showClass: {
+            backdrop: "swal2-noanimation",
+            popup: "",
+          },
         });
-      } else {
-        swal(`${name} has not been deleted.`);
       }
     });
   };
