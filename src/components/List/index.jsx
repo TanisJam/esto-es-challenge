@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   filterProjects,
@@ -10,14 +10,20 @@ import styles from "./List.module.scss";
 
 export default function List() {
   const dispatch = useDispatch();
-  
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = useSelector((state) => state.projects.totalPages);
   const { projects } = useSelector((state) => state.projects);
   const { filteredProjects } = useSelector((state) => state.projects);
   const { isSearch } = useSelector((state) => state.projects);
 
   useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
+    dispatch(getProjects({ page: currentPage }));
+  }, [dispatch, currentPage]);
+  const handlePagination = (page) => {
+    if (page < 0) return;
+    if (page >= totalPages) return;
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     dispatch(filterProjects({ reset: true }));
@@ -57,7 +63,7 @@ export default function List() {
         </thead>
         <tbody>{projectsList()}</tbody>
       </table>
-      <Pagination />
+      <Pagination page={currentPage} handlePagination={handlePagination} />
     </>
   );
 }

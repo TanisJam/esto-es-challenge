@@ -75,14 +75,16 @@ let projects = [
 let id = 5;
 
 export function fetchProjects(props) {
-  const start = props?.start || 0;
-  const count = props?.count || projects.length;
+  const { page } = props;
+  const start = 0;
+  const count = 3;
+  const pageData = projects.slice(start + page * count, count + page * count);
 
-  const data = projects.slice(start, count);
+  const totalPages = Math.ceil(projects.length / count);
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({ data });
+      resolve({ data: {pageData, totalPages} });
     }, 200);
   });
 }
@@ -165,7 +167,6 @@ export function editProject(props) {
 export function removeProject(props) {
   const id = props;
   projects = projects.filter((project) => project.id !== id);
-  console.log("projects", projects);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ sucsess: true });

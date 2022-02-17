@@ -1,18 +1,14 @@
 import React from "react";
 import styles from "./Pagination.module.scss";
 
-export default function Pagination({handlePagination, page}) {
+export default function Pagination({ handlePagination, page }) {
   return (
     <div className={styles.container}>
-      <button >&laquo;</button>
+      <button onClick={() => handlePagination(page - 1)}>&lsaquo;</button>
 
-      <button>&lsaquo;</button>
+      <button className={styles.active}>{page + 1}</button>
 
-      <button className={styles.active}>2</button>
-
-      <button>&rsaquo;</button>
-
-      <button>&raquo;</button>
+      <button onClick={() => handlePagination(page + 1)}>&rsaquo;</button>
     </div>
   );
 }

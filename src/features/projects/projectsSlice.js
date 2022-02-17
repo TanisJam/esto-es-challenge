@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   status: "idle",
+  totalPages: 0,
   projects: [],
   isSearch: false,
   filteredProjects: [],
@@ -65,11 +66,6 @@ export const projectsSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {
-    // deleteProject: (state, action) => {
-    //   state.projects = state.projects.filter(
-    //     (project) => project.id !== action.payload
-    //   );
-    // },
     resetFilter: (state) => {
       state.isSearch = false;
       state.filteredProjects = [];
@@ -82,7 +78,8 @@ export const projectsSlice = createSlice({
       })
       .addCase(getProjects.fulfilled, (state, action) => {
         state.status = "idle";
-        state.projects = action.payload;
+        state.totalPages = action.payload.totalPages;
+        state.projects = action.payload.pageData;
       })
       .addCase(filterProjects.pending, (state) => {
         state.status = "loading";
