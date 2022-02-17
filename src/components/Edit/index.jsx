@@ -6,7 +6,7 @@ import { ErrorMessage, Form, Field, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import Toast from "./../toast";
 import Button from "./../Button";
-import styles from "./Edit.module.scss";
+import styles from "./../../styles/forms.module.scss";
 
 export default function Edit() {
   const location = useLocation();
