@@ -19,6 +19,13 @@
     background-color: rgba(0, 0, 0, 0.02);
     box-shadow: 0 -1px 0 #d9d9d9 inner;
   }
+  tbody {
+    tr{
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+  }
   @media screen and (max-width: 480px) {
     .header {
       display: none;
