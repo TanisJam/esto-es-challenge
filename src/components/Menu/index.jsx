@@ -1,10 +1,14 @@
 import React from "react";
+import { Menu as MenuS, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/core.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
 import styles from "./Menu.module.scss";
 import { useDispatch } from "react-redux";
-import { deleteProject } from "../../features/projects/projectsSlice";
+import { deleteProject, filterProjects } from "../../features/projects/projectsSlice";
 import { useNavigate } from "react-router-dom";
+import { FiMoreVertical } from "react-icons/fi";
 import { RiEditBoxLine, RiDeleteBin7Line } from "react-icons/ri";
-import { GoTriangleUp } from "react-icons/go";
+
 import Swal from "sweetalert2";
 
 export default function Menu({ isOpen, id, name }) {
@@ -29,6 +33,7 @@ export default function Menu({ isOpen, id, name }) {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteProject(id));
+        dispatch(filterProjects({ reset: true }));
         Swal.fire({
           text: `${name} has been successfully deleted`,
           icon: "success",
@@ -41,18 +46,25 @@ export default function Menu({ isOpen, id, name }) {
     });
   };
   return (
-    <div className={styles.menu} style={{ display: isOpen ? "flex" : "none" }}>
-      <div className={styles.up}>
-        <GoTriangleUp />
-      </div>
-      <button className={styles.edit} onClick={handleEdith}>
+    <MenuS
+      menuButton={
+        <MenuButton className={styles.menuButton}>
+          <FiMoreVertical />
+        </MenuButton>
+      }
+      align="end"
+      arrow={true}
+      menuClassName={styles.contextMenu}
+      transition
+    >
+      <MenuItem className={styles.option} onClick={handleEdith}>
         <RiEditBoxLine />
         Edit
-      </button>
-      <button className={styles.delete} onClick={handleDelete}>
+      </MenuItem>
+      <MenuItem className={styles.option} onClick={handleDelete}>
         <RiDeleteBin7Line />
         Delete
-      </button>
-    </div>
+      </MenuItem>
+    </MenuS>
   );
 }

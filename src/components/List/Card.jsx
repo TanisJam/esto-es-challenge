@@ -1,16 +1,8 @@
 import React from "react";
 import styles from "./Card.module.scss";
 import Menu from "./../Menu";
-import { FiMoreVertical } from "react-icons/fi";
 
-export default function Card({ project, menuOpen, setIsMenuOpen }) {
-  const hadleMenuOpen = () => {
-    if (menuOpen !== project.id) {
-      setIsMenuOpen(project.id);
-    } else {
-      setIsMenuOpen(null);
-    }
-  };
+export default function Card({ project }) {
   return (
     <tr className={styles.card}>
       <td>
@@ -46,17 +38,8 @@ export default function Card({ project, menuOpen, setIsMenuOpen }) {
           <p>{project.status}</p>
         </div>
       </td>
-      <td className={styles.actions}>
-        <div onClick={hadleMenuOpen}>
-          <FiMoreVertical />
-        </div>
-      </td>
       <td className={styles.menu}>
-        <Menu
-          isOpen={menuOpen === project.id}
-          id={project.id}
-          name={project.name}
-        />
+        <Menu id={project.id} name={project.name} />
       </td>
     </tr>
   );
