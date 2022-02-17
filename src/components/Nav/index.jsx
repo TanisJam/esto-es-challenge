@@ -10,6 +10,7 @@ import { MdArrowBack } from "react-icons/md";
 export default function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
+  const isHome = location.pathname === "/";
   const isAdd = location.pathname === "/add";
   const isEdit = location.pathname === "/edit";
   const title = () => {
@@ -42,7 +43,7 @@ export default function Nav() {
           </Button>
         )}
       </div>
-      <Search />
+      {isHome && <Search />}
     </nav>
   );
 }
