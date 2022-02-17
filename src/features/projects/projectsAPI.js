@@ -1,4 +1,4 @@
-const projects = [
+let projects = [
   {
     id: 1,
     name: "Landing Page",
@@ -72,6 +72,7 @@ const projects = [
     },
   },
 ];
+let id = 5;
 
 export function fetchProjects(props) {
   const start = props?.start || 0;
@@ -79,16 +80,15 @@ export function fetchProjects(props) {
 
   const data = projects.slice(start, count);
 
-  console.log("fetchProjects");
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ data });
-    }, 500);
+    }, 200);
   });
 }
 
 export function searchProjects(props) {
-  const query = props.query;
+  const query = props.search;
   const data = projects.filter((project) =>
     project.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -96,6 +96,68 @@ export function searchProjects(props) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ data });
+    }, 500);
+  });
+}
+
+export function createProject(props) {
+  const { name, description, asignee, status, projectManager } = props;
+  const projectToAdd = {
+    id: id++,
+    name,
+    description,
+    createdDate: "2020/09/09",
+    createdHour: "10:30 am",
+    asignee: {
+      id: 1,
+      name: asignee,
+      avatar: "https://i.pravatar.cc/150",
+    },
+    status,
+    projectManager: {
+      id: 3,
+      name: projectManager,
+      avatar: "https://i.pravatar.cc/150",
+    },
+  };
+  projects.push(projectToAdd);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(projectToAdd);
+    }, 500);
+  });
+}
+
+export function editProject(props) {
+  const { id, name, description, asignee, status, projectManager } = props;
+  projects = projects.map((project) => {
+    if (project.id === id) {
+      const projectToAdd = {
+        id,
+        name,
+        description,
+        createdDate: "2020/09/09",
+        createdHour: "10:30 am",
+        asignee: {
+          id: 1,
+          name: asignee,
+          avatar: "https://i.pravatar.cc/150",
+        },
+        status,
+        projectManager: {
+          id: 3,
+          name: projectManager,
+          avatar: "https://i.pravatar.cc/150",
+        },
+      };
+      return projectToAdd;
+    }
+    return project;
+  });
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ sucsess: true });
     }, 500);
   });
 }

@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchProjects } from "./projectsAPI";
-
-let id = 4;
+import {
+  fetchProjects,
+  searchProjects,
+  createProject,
+  editProject,
+} from "./projectsAPI";
 
 const initialState = {
   status: "idle",
@@ -18,68 +21,48 @@ export const getProjects = createAsyncThunk(
   }
 );
 
+export const filterProjects = createAsyncThunk(
+  "projets/filterProjects",
+  async (request, { dispatch }) => {
+    if (request.reset) {
+      dispatch(resetFilter());
+    } else {
+      const response = await searchProjects(request);
+      return response.data;
+    }
+  }
+);
+
+export const addProject = createAsyncThunk(
+  "projets/addProject",
+  async (request, { dispatch }) => {
+    const response = await createProject(request);
+    dispatch(getProjects());
+    return response.data;
+  }
+);
+
+export const updateProject = createAsyncThunk(
+  "projets/updateProject",
+  async (request, { dispatch }) => {
+    const response = await editProject(request);
+    dispatch(getProjects());
+    return response.data;
+  }
+);
+
 export const projectsSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {
-    addProject: (state, action) => {
-      const { name, description, asignee, status, projectManager } =
-        action.payload;
-      const projectToAdd = {
-        id: id++,
-        name,
-        description,
-        createdDate: "2020/09/09",
-        createdHour: "10:30 am",
-        asignee: {
-          id: 1,
-          name: asignee,
-          avatar: "https://i.pravatar.cc/150",
-        },
-        status,
-        projectManager: {
-          id: 3,
-          name: projectManager,
-          avatar: "https://i.pravatar.cc/150",
-        },
-      };
-      state.projects.push(projectToAdd);
-    },
     deleteProject: (state, action) => {
       state.projects = state.projects.filter(
         (project) => project.id !== action.payload
       );
     },
-    udpateProject: (state, action) => {
-      const { name, description, projectManager, asignee, status } =
-        action.payload;
-      state.projects = state.projects.map((project) => {
-        if (project.id === action.payload.id) {
-          const projectEdited = {
-            ...project,
-            name,
-            description,
-            status,
-          };
-          projectEdited.projectManager.name = projectManager;
-          projectEdited.asignee.name = asignee;
-          return projectEdited;
-        }
-        return project;
-      });
-    },
-    filterProjects: (state, action) => {
-      const { search, reset } = action.payload;
-      if (reset) {
-        state.isSearch = false;
-        state.filteredProjects = [];
-      } else {
-        state.isSearch = true;
-        state.filteredProjects = state.projects.filter((project) => {
-          const { name } = project;
-          return name.toLowerCase().includes(search.toLowerCase());
-        });
-      }
+    resetFilter: (state) => {
+      state.isSearch = false;
+      state.filteredProjects = [];
     },
   },
   extraReducers: (builder) => {
@@ -90,11 +73,32 @@ export const projectsSlice = createSlice({
       .addCase(getProjects.fulfilled, (state, action) => {
         state.status = "idle";
         state.projects = action.payload;
+      })
+      .addCase(filterProjects.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(filterProjects.fulfilled, (state, action) => {
+        state.status = "idle";
+        if (action.payload?.length > 0) {
+          state.isSearch = true;
+        }
+        state.filteredProjects = action.payload;
+      })
+      .addCase(addProject.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addProject.fulfilled, (state, action) => {
+        state.status = "idle";
+      })
+      .addCase(updateProject.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateProject.fulfilled, (state, action) => {
+        state.status = "idle";
       });
   },
 });
 
-export const { addProject, deleteProject, udpateProject, filterProjects } =
-  projectsSlice.actions;
+export const { deleteProject, resetFilter } = projectsSlice.actions;
 
 export default projectsSlice.reducer;

@@ -10,7 +10,9 @@ export default function Search() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    setSearch("");
+    if (!isSearch) {
+      setSearch("");
+    }
   }, [isSearch]);
 
   const handleChange = (e) => {

@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addProject } from "../../features/projects/projectsSlice";
 import { ErrorMessage, Form, Field, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
+import Loading from "../Loading";
 import Toast from "./../toast";
 import Button from "./../Button";
 import styles from "./../../styles/forms.module.scss";
@@ -11,16 +12,18 @@ import styles from "./../../styles/forms.module.scss";
 export default function Add() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const status = useSelector((state) => state.projects.status);
+
   const initialValues = {
     name: "",
     description: "",
     projectManager: "",
     asignee: "",
-    status: "",
+    status: "Enabled",
   };
 
-  const onSubmit = (values) => {
-    dispatch(addProject(values));
+  const onSubmit = async (values) => {
+    await dispatch(addProject(values));
     Toast.fire({
       icon: "success",
       title: "Project successfully added",
@@ -108,7 +111,9 @@ export default function Add() {
           />
         </div>
         <div className={styles.formGroup}>
-          <Button type="submit">Create project</Button>
+          <Button type="submit">
+            {status === "loading" ? <Loading /> : "Create project"}
+          </Button>
         </div>
       </Form>
     </FormikProvider>

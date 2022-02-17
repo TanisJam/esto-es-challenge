@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { udpateProject } from "../../features/projects/projectsSlice";
+import { updateProject } from "../../features/projects/projectsSlice";
 import { ErrorMessage, Form, Field, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
+import Loading from "../Loading";
 import Toast from "./../toast";
 import Button from "./../Button";
 import styles from "./../../styles/forms.module.scss";
@@ -13,6 +14,7 @@ export default function Edit() {
   const id = location.state.id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const status = useSelector((state) => state.projects.status);
   const { projects } = useSelector((state) => state.projects);
   const project = projects.find((project) => project.id === id);
 
@@ -24,8 +26,8 @@ export default function Edit() {
     status: project.status,
   };
 
-  const onSubmit = (values) => {
-    dispatch(udpateProject({ id, ...values }));
+  const onSubmit = async (values) => {
+    await dispatch(updateProject({ id, ...values }));
     Toast.fire({
       icon: "success",
       title: "Edit project successfully",
@@ -113,7 +115,9 @@ export default function Edit() {
           />
         </div>
         <div className={styles.formGroup}>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit">
+            {status === "loading" ? <Loading /> : "Save changes"}
+          </Button>
         </div>
       </Form>
     </FormikProvider>

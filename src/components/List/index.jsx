@@ -10,7 +10,7 @@ import styles from "./List.module.scss";
 
 export default function List() {
   const dispatch = useDispatch();
-
+  
   const { projects } = useSelector((state) => state.projects);
   const { filteredProjects } = useSelector((state) => state.projects);
   const { isSearch } = useSelector((state) => state.projects);
@@ -35,7 +35,9 @@ export default function List() {
     } else {
       return (
         <tr>
-          <td colSpan="5">No projects found</td>
+          <td colSpan="5" style={{ padding: "2rem" }}>
+            No projects found
+          </td>
         </tr>
       );
     }
