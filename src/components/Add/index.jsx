@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addProject } from "../../features/projects/projectsSlice";
 import { ErrorMessage, Form, Field, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
+import Toast from "./../toast";
 import Button from "./../Button";
 import styles from "./Add.module.scss";
 
@@ -20,6 +21,10 @@ export default function Add() {
 
   const onSubmit = (values) => {
     dispatch(addProject(values));
+    Toast.fire({
+      icon: "success",
+      title: "Project successfully added",
+    });
     navigate("/");
   };
 

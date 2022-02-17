@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { udpateProject } from "../../features/projects/projectsSlice";
 import { ErrorMessage, Form, Field, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
+import Toast from "./../toast";
 import Button from "./../Button";
 import styles from "./Edit.module.scss";
 
@@ -25,6 +26,10 @@ export default function Edit() {
 
   const onSubmit = (values) => {
     dispatch(udpateProject({ id, ...values }));
+    Toast.fire({
+      icon: "success",
+      title: "Edit project successfully",
+    });
     navigate("/");
   };
 
