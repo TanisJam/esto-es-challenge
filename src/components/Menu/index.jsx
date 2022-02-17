@@ -4,14 +4,17 @@ import "@szhsin/react-menu/dist/core.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import styles from "./Menu.module.scss";
 import { useDispatch } from "react-redux";
-import { deleteProject, filterProjects } from "../../features/projects/projectsSlice";
+import {
+  deleteProject,
+  filterProjects,
+} from "../../features/projects/projectsSlice";
 import { useNavigate } from "react-router-dom";
 import { FiMoreVertical } from "react-icons/fi";
 import { RiEditBoxLine, RiDeleteBin7Line } from "react-icons/ri";
 
 import Swal from "sweetalert2";
 
-export default function Menu({ isOpen, id, name }) {
+export default function Menu({ id, name }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleEdith = () => {
