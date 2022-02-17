@@ -26,7 +26,8 @@ export const getProjects = createAsyncThunk(
 export const filterProjects = createAsyncThunk(
   "projets/filterProjects",
   async (request, { dispatch }) => {
-    if (request.reset) {
+    console.log("request", request);
+    if (request.reset || request.search === "") {
       dispatch(resetFilter());
     } else {
       const response = await searchProjects(request);

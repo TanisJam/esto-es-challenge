@@ -75,7 +75,7 @@ let projects = [
 let id = 5;
 
 export function fetchProjects(props) {
-  const { page } = props;
+  const page = props?.page || 0;
   const start = 0;
   const count = 3;
   const pageData = projects.slice(start + page * count, count + page * count);

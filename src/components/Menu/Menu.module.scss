@@ -1,4 +1,5 @@
 .option {
+  pointer-events: auto;
   background-color: white;
   border: none;
   padding: 0.2rem 2rem 0.2rem 1rem;
@@ -19,6 +20,7 @@
 }
 
 .menuButton {
+  pointer-events: auto;
   border: none;
   background-color: transparent;
   svg {

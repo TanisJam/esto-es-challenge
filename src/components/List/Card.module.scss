@@ -48,6 +48,7 @@
     }
   }
   @media screen and (max-width: 480px) {
+    pointer-events: none;
     position: relative;
     .projectManager,
     .status {

@@ -15,7 +15,6 @@ export default function List() {
   const { projects } = useSelector((state) => state.projects);
   const { filteredProjects } = useSelector((state) => state.projects);
   const { isSearch } = useSelector((state) => state.projects);
-
   useEffect(() => {
     dispatch(getProjects({ page: currentPage }));
   }, [dispatch, currentPage]);
@@ -63,7 +62,9 @@ export default function List() {
         </thead>
         <tbody>{projectsList()}</tbody>
       </table>
-      <Pagination page={currentPage} handlePagination={handlePagination} />
+      {(totalPages > 1 && !isSearch) && (
+        <Pagination page={currentPage} handlePagination={handlePagination} />
+      )}
     </>
   );
 }
