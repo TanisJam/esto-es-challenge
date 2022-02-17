@@ -1,67 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchProjects } from "./projectsAPI";
 
 let id = 4;
 
 const initialState = {
-  projects: [
-    {
-      id: 1,
-      name: "Landing Page",
-      description: "Project",
-      createdDate: "2020/09/09",
-      createdHour: "10:30 am",
-      asignee: {
-        id: 1,
-        name: "Ignacio Truffa",
-        avatar: "https://i.pravatar.cc/150?img=1",
-      },
-      status: "Enabled",
-      projectManager: {
-        id: 3,
-        name: "Walt Cosani",
-        avatar: "https://i.pravatar.cc/150?img=2",
-      },
-    },
-    {
-      id: 2,
-      name: "E-Comerce Shop",
-      description: "Project",
-      createdDate: "2020/09/09",
-      createdHour: "10:30 am",
-      asignee: {
-        id: 1,
-        name: "Ignacio Truffa",
-        avatar: "https://i.pravatar.cc/150?img=1",
-      },
-      status: "Enabled",
-      projectManager: {
-        id: 3,
-        name: "Walt Cosani",
-        avatar: "https://i.pravatar.cc/150?img=2",
-      },
-    },
-    {
-      id: 3,
-      name: "CMR Linkroom",
-      description: "Project",
-      createdDate: "2020/09/09",
-      createdHour: "10:30 am",
-      asignee: {
-        id: 1,
-        name: "Ignacio Truffa",
-        avatar: "https://i.pravatar.cc/150?img=1",
-      },
-      status: "Enabled",
-      projectManager: {
-        id: 3,
-        name: "Walt Cosani",
-        avatar: "https://i.pravatar.cc/150?img=2",
-      },
-    },
-  ],
+  status: "idle",
+  projects: [],
   isSearch: false,
   filteredProjects: [],
 };
+
+export const getProjects = createAsyncThunk(
+  "projets/fetchProjects",
+  async (request) => {
+    const response = await fetchProjects(request);
+    return response.data;
+  }
+);
 
 export const projectsSlice = createSlice({
   name: "projects",
@@ -127,11 +82,19 @@ export const projectsSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getProjects.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getProjects.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.projects = action.payload;
+      });
+  },
 });
 
 export const { addProject, deleteProject, udpateProject, filterProjects } =
   projectsSlice.actions;
-
-export const selectCount = (state) => state.projects.value;
 
 export default projectsSlice.reducer;

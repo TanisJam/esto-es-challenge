@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterProjects } from "../../features/projects/projectsSlice";
+import {
+  filterProjects,
+  getProjects,
+} from "../../features/projects/projectsSlice";
 import Card from "./Card";
+import Pagination from "./../Pagination";
 import styles from "./List.module.scss";
 
 export default function List() {
@@ -10,6 +14,10 @@ export default function List() {
   const { projects } = useSelector((state) => state.projects);
   const { filteredProjects } = useSelector((state) => state.projects);
   const { isSearch } = useSelector((state) => state.projects);
+
+  useEffect(() => {
+    dispatch(getProjects());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(filterProjects({ reset: true }));
@@ -34,17 +42,20 @@ export default function List() {
   };
 
   return (
-    <table className={styles.list}>
-      <thead className={styles.header}>
-        <tr>
-          <td>Project info</td>
-          <td> Project Manager </td>
-          <td> Assiged to </td>
-          <td> Status </td>
-          <td> Action </td>
-        </tr>
-      </thead>
-      <tbody>{projectsList()}</tbody>
-    </table>
+    <>
+      <table className={styles.list}>
+        <thead className={styles.header}>
+          <tr>
+            <td>Project info</td>
+            <td> Project Manager </td>
+            <td> Assiged to </td>
+            <td> Status </td>
+            <td> Action </td>
+          </tr>
+        </thead>
+        <tbody>{projectsList()}</tbody>
+      </table>
+      <Pagination />
+    </>
   );
 }
